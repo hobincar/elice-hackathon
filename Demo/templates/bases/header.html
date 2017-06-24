@@ -1,7 +1,11 @@
 <div class="ui inverted vertical masthead center aligned segment">
     <div class="ui container">
         <div class="ui large secondary inverted pointing menu">
-            <a class="item">Elice Hackathon Project</a>
+            <a class="item {% if request.path == '/' or request.path == '/LR_3in/' %}active{% endif %}" href="{% url 'LR_3in' %}">LR with 3 input</a>
+            <a class="item {% if request.path == '/LR_4in/' %}active{% endif %}" href="{% url 'LR_4in' %}">LR with 4 input</a>
+            <div class="right item">
+                <a class="ui inverted button hover">Elice Hackathon Project</a>
+            </div>
         </div>
     </div>
 </div>

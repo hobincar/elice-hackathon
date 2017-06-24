@@ -14,9 +14,9 @@
         </div>
     </h2>
     <div class="ui hidden divider"></div>
-    <form role="form" class="ui large login form" method="post" action="{% url 'main' %}">{% csrf_token %}
+    <form role="form" class="ui large login form" method="post" action="{% url 'LR_4in' %}">{% csrf_token %}
         <div class="ui stacked segment">
-            <div class="three fields">
+            <div class="four fields">
                 <div id="age_field" class="field required">
                     <label>나이</label>
                     <div class="ui left icon input">
@@ -33,6 +33,28 @@
                         <div class="menu">
                             <div class="item" data-value="1">남자</div>
                             <div class="item" data-value="2">여자</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="start_month_field" class="field required">
+                    <label>진료받은 달</label>
+                    <div class="ui floating selection dropdown labeled icon fluid button">
+                        <input type="hidden" name="start_month" value="{{ form.start_month.value }}"/>
+                        <i class="Calendar icon"></i>
+                        <div class="default text">진료받은 달</div>
+                        <div class="menu">
+                            <div class="item" data-value="2015-01-01">1월</div>
+                            <div class="item" data-value="2015-02-01">2월</div>
+                            <div class="item" data-value="2015-03-01">3월</div>
+                            <div class="item" data-value="2015-04-01">4월</div>
+                            <div class="item" data-value="2015-05-01">5월</div>
+                            <div class="item" data-value="2015-06-01">6월</div>
+                            <div class="item" data-value="2015-07-01">7월</div>
+                            <div class="item" data-value="2015-08-01">8월</div>
+                            <div class="item" data-value="2015-09-01">9월</div>
+                            <div class="item" data-value="2015-10-01">10월</div>
+                            <div class="item" data-value="2015-11-01">11월</div>
+                            <div class="item" data-value="2015-12-01">12월</div>
                         </div>
                     </div>
                 </div>

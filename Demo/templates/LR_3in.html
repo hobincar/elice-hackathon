@@ -1,0 +1,144 @@
+{% extends "bases/base.html" %}
+{% load humanize %}
+
+{% block css %}
+    <link rel="stylesheet" href="/static/css/main.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="column">
+    <h2 class="ui teal header center aligned grid">
+        <div class="content">
+            나이, 성별, 입원 여부, 질병 이름을 입력해주세요
+        </div>
+    </h2>
+    <div class="ui hidden divider"></div>
+    <form role="form" class="ui large login form" method="post" action="{% url 'LR_3in' %}">{% csrf_token %}
+        <div class="ui stacked segment">
+            <div class="three fields">
+                <div id="age_field" class="field required">
+                    <label>나이</label>
+                    <div class="ui left icon input">
+                        <i class="users icon"></i>
+                        <input id="age" class="ui" type="number" name="age" placeholder="나이" value="{{ form.age.value }}"/>
+                    </div>
+                </div>
+                <div id="sex_field" class="field required">
+                    <label>성별</label>
+                    <div class="ui floating selection dropdown labeled icon fluid button">
+                        <input type="hidden" name="sex" value="{{ form.sex.value }}"/>
+                        <i class="Neuter icon"></i>
+                        <div class="default text">성별</div>
+                        <div class="menu">
+                            <div class="item" data-value="1">남자</div>
+                            <div class="item" data-value="2">여자</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="hospital_treatment_field" class="field required">
+                    <label>입원 여부</label>
+                    <div class="ui floating selection dropdown labeled icon fluid button">
+                        <input type="hidden" name="hospital_treatment" value="{{ form.hospital_treatment.value }}"/>
+                        <i class="Hospital icon"></i>
+                        <div class="default text">수술 여부</div>
+                        <div class="menu">
+                            <div class="item" data-value="9">수술 O</div>
+                            <div class="item" data-value="0">수술 X</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="disease_field" class="field required">
+                <label>질병 이름</label>
+                <div class="ui floating selection dropdown labeled icon fluid button">
+                    <input type="hidden" name="disease" value="{{ form.disease.value }}"/>
+                    <i class="Frown icon"></i>
+                    <div class="default text">질병 이름</div>
+                    <div class="menu">
+                        <div class="item" data-value="E119">합병증을 동반하지 않은 2형 당뇨병</div>
+                        <div class="item" data-value="I00">심장침범에 대한 언급이 없는 류마티스열</div>
+                        <div class="item" data-value="I109">기타 및 상세불명의 원발성 고혈압</div>
+                        <div class="item" data-value="J00">급성 비인두염[감기]</div>
+                        <div class="item" data-value="J029">상세불명의 급성 인두염</div>
+                        <div class="item" data-value="J060">급성 후두인두염</div>
+                        <div class="item" data-value="J069">상세불명의 급성 상기도감염</div>
+                        <div class="item" data-value="J209">상세불명의 급성 기관지염</div>
+                        <div class="item" data-value="J304">상세불명의 앨러지비염</div>
+                        <div class="item" data-value="J0390">재발성으로 명시되어 있지 않은 상세불명의 급성 편도염</div>
+                        <div class="item" data-value="K021">상아질의 우식</div>
+                        <div class="item" data-value="K0401">비가역적 치수염</div>
+                        <div class="item" data-value="K0530">만성 단순치주염</div>
+                        <div class="item" data-value="K0531">만성 복합치주염</div>
+                        <div class="item" data-value="L239">상세불명 원인의 앨러지성 접촉피부염</div>
+                        <div class="item" data-value="M170">양쪽 원발성 무릎관절증</div>
+                        <div class="item" data-value="M170">신경뿌리병증을 동반한 요추 및 기타 추간판장애</div>
+                        <div class="item" data-value="M511">신경뿌리병증을 동반한 요추 및 기타 추간판장애</div>
+                        <div class="item" data-value="M4806">척추협착, 요추부</div>
+                        <div class="item" data-value="M5456">요통, 요추부</div>
+                        <div class="item" data-value="N185">만성 신장병(5기)</div>
+                        <div class="item" data-value="S3350">요추의 염좌 및 긴장</div>
+                    </div>
+                </div>
+            </div>
+            <div id="show_result_field" class="field required">
+                <label>원하는 결과</label>
+                <div class="ui floating selection dropdown labeled icon fluid button">
+                    <input type="hidden" name="show_result" value="{{ form.show_result.value }}"/>
+                    <i class="users icon"></i>
+                    <div class="default text">원하는 결과</div>
+                    <div class="menu">
+                        <div class="item" data-value="C">예상 비용</div>
+                        <div class="item" data-value="P">예상 진료 기간</div>
+                    </div>
+                </div>
+            </div>
+            {% if form.errors %}
+                <p class="ui error">입력 값을 다시 확인해 주세요</p>
+            {% endif %}
+            <div class="ui error message"></div>
+            <button type="submit" class="ui fluid large teal submit button">제출</button>
+        </div>
+    </form>
+    {% if not form.errors and form.show_result.value %}
+    <div class="ui hidden divider"></div>
+    <h4 class="ui horizontal divider header">
+        <i class="bar chart icon"></i>
+        Result: {% if form.show_result.value == 'C' %} 예상 비용 {% else %} 예상 진료 기간 {% endif %}
+    </h4>
+    
+    <div class="ui grid items">
+        <div class="item">
+            <div class="content ui center aligned grid">
+                <div class="description">
+                    {% if form.show_result.value == 'C' %}
+                        <div class="ui statistic">
+                            <div class="value">
+                                {{ result.cost|intcomma }}
+                            </div>
+                            <div class="label">
+                                원
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="ui statistic">
+                            <div class="value">
+                                {{ result.period }}
+                            </div>
+                            <div class="label">
+                                일
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/main.js"></script>
+{% endblock %}
