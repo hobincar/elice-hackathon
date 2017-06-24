@@ -19,17 +19,16 @@ def main(request):
             AGG = float(form.cleaned_data['age']) // 5 + 1
             SEX_TP_CD = float(form.cleaned_data['sex'])
             SOPR_YN = float(form.cleaned_data['hospital_treatment'])
-            DUMMY_DATA = 1.0
 
             # Linear Regression
             if form.cleaned_data['show_result'] == 'C':
                 model = joblib.load("Demo/static/models/%s_LINEAR_REGR_COST.model" % form.cleaned_data['disease'])
-                cost = model.predict([[AGG, SEX_TP_CD, DUMMY_DATA, SOPR_YN, DUMMY_DATA]])
-                result['cost'] = cost
+                cost = model.predict([[AGG, SEX_TP_CD, SOPR_YN]])
+                result['cost'] = cost[0][0]
             else:
                 model = joblib.load("Demo/static/models/%s_LINEAR_REGR_PERIOD.model" % form.cleaned_data['disease'])
-                period = model.predict([[AGG, SEX_TP_CD, DUMMY_DATA, SOPR_YN, DUMMY_DATA]])
-                result['period'] = period
+                period = model.predict([[AGG, SEX_TP_CD, SOPR_YN]])
+                result['period'] = period[0][0]
 
     else:
         form = UserInputForm
