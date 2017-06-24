@@ -10,11 +10,11 @@ def main(request):
     if request.method == 'POST':
         form = UserInputForm(request.POST)
         if form.is_valid():
-            print("age: %s\n" % form.cleaned_data['age'])
-            print("sex: %s\n" % form.cleaned_data['sex'])
-            print("hospital_treatment: %s\n" % form.cleaned_data['hospital_treatment'])
-            print("disease: %s\n" % form.cleaned_data['disease'])
-            print("show_result: %s\n" % form.cleaned_data['show_result'])
+            print("age: %s" % form.cleaned_data['age'])
+            print("sex: %s" % form.cleaned_data['sex'])
+            print("hospital_treatment: %s" % form.cleaned_data['hospital_treatment'])
+            print("disease: %s" % form.cleaned_data['disease'])
+            print("show_result: %s" % form.cleaned_data['show_result'])
 
             AGG = float(form.cleaned_data['age']) // 5 + 1
             SEX_TP_CD = float(form.cleaned_data['sex'])
@@ -23,12 +23,12 @@ def main(request):
             # Linear Regression
             if form.cleaned_data['show_result'] == 'C':
                 model = joblib.load("Demo/static/models/%s_LINEAR_REGR_COST.model" % form.cleaned_data['disease'])
-                cost = model.predict([[AGG, SEX_TP_CD, SOPR_YN]])
-                result['cost'] = cost[0][0]
+                cost = model.predict([[AGG, SEX_TP_CD, SOPR_YN]])[0][0]
+                result['cost'] = format(cost, ".2f")
             else:
                 model = joblib.load("Demo/static/models/%s_LINEAR_REGR_PERIOD.model" % form.cleaned_data['disease'])
-                period = model.predict([[AGG, SEX_TP_CD, SOPR_YN]])
-                result['period'] = period[0][0]
+                period = model.predict([[AGG, SEX_TP_CD, SOPR_YN]])[0][0]
+                result['period'] = format(period, ".2f")
 
     else:
         form = UserInputForm
