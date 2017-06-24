@@ -5,8 +5,8 @@ class UserInputForm(forms.Form):
     age = forms.CharField()
     sex = forms.ChoiceField(
         choices=([
-            ('M', 'Male'),
-            ('F', 'Female'),
+            ('1', 'Male'),
+            ('2', 'Female'),
         ])
     )
     hospital_treatment = forms.CharField()

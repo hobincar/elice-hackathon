@@ -31,8 +31,8 @@
                         <i class="Neuter icon"></i>
                         <div class="default text">성별</div>
                         <div class="menu">
-                            <div class="item" data-value="M">남자</div>
-                            <div class="item" data-value="F">여자</div>
+                            <div class="item" data-value="1">남자</div>
+                            <div class="item" data-value="2">여자</div>
                         </div>
                     </div>
                 </div>
@@ -41,10 +41,10 @@
                     <div class="ui floating selection dropdown labeled icon fluid button">
                         <input type="hidden" name="hospital_treatment" value="{{ form.hospital_treatment.value }}"/>
                         <i class="Hospital icon"></i>
-                        <div class="default text">입원 여부</div>
+                        <div class="default text">수술 여부</div>
                         <div class="menu">
-                            <div class="item" data-value="T">입원</div>
-                            <div class="item" data-value="F">외래</div>
+                            <div class="item" data-value="0">수술 O</div>
+                            <div class="item" data-value="9">수술 X</div>
                         </div>
                     </div>
                 </div>
