@@ -6,7 +6,9 @@ gunicorn==19.7.1
 Jinja2==2.9.6
 MarkupSafe==1.0
 numpy==1.13.0
+pandas==0.20.2
 psycopg2==2.7.1
+python-dateutil==2.6.0
 python-nvd3==0.14.2
 python-slugify==1.1.4
 pytz==2017.2

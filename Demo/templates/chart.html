@@ -1,7 +1,3 @@
-{% load static %}
-<script src="{% static 'd3/d3.min.js' %}"></script>
-<script src="{% static 'nvd3/build/nv.d3.min.js' %}"></script>
-<link media="all" href="{% static 'nvd3/build/nv.d3.css' %}" type="text/css" rel="stylesheet" />
 <style>
 #chart svg {
   height: 400px;
@@ -16,28 +12,24 @@
     stroke-opacity: 0;
 }
 </style>
-<div id="chart">
+<div id="chart" style="width: 80vw">
   <svg></svg>
 </div>
 <script type="text/javascript">
 data = function() {
-  var sin = [],
-      cos = [];
+  var scatter = {{scatter_data | safe }},
+      line = {{line_data | safe }};
 
-  for (var i = 0; i < 100; i++) {
-    sin.push({x: i, y: Math.sin(i/10), shape: 'square'});
-    cos.push({x: i, y: .5 * Math.cos(i/10)});
-  }
 
   return [
     {
-      values: sin,
-      key: 'Sine Wave',
+      values: scatter,
+      key: '예상 결과',
       color: '#ff7f0e'
     },
     {
-      values: cos,
-      key: 'Cosine Wave',
+      values: line,
+      key: '전체 데이터',
       color: '#2ca02c'
     }
   ];
@@ -46,12 +38,12 @@ nv.addGraph(function() {
   var chart = nv.models.lineChart();
 
   chart.xAxis
-      .axisLabel('Time (ms)')
+      .axisLabel('{{xlabel}}')
       .tickFormat(d3.format(',r'));
 
   chart.yAxis
-      .axisLabel('Voltage (v)')
-      .tickFormat(d3.format('.02f'));
+      .axisLabel('{{ylabel}}')
+      .tickFormat(d3.format(',d'));
 
   d3.select('#chart svg')
       .datum(data())
