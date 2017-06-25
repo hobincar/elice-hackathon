@@ -1,9 +1,12 @@
+{% load static %}
+<link media="all" href="{% static 'nvd3/build/nv.d3.css' %}" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src='{% static 'd3/d3.min.js' %}'></script>
+<script type="text/javascript" src='{% static 'nvd3/build/nv.d3.min.js' %}'></script>
+
 {% load nvd3_tags %}
 <head>
-    {% include_chart_jscss %}
-    {% load_chart charttype chartdata chartcontainer extra %}
+    {% load_chart charttype chartdata "scatterchart_container" %}
 </head>
 <body>
-    <h1>Fruits vs Calories</h1>
-    {% include_container chartcontainer 400 600 %}
+    {% include_container "scatterchart_container" 400 600 %}
 </body>
