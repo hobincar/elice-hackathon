@@ -25,7 +25,7 @@ data = function() {
     {
       values: scatter,
       key: '예상 결과',
-      color: '#ff7f0e'
+      color: '#ff7f0e',
     },
     {
       values: line,
@@ -36,6 +36,7 @@ data = function() {
 }
 nv.addGraph(function() {
   var chart = nv.models.lineChart();
+  chart.pointRange([45, 50]);
 
   chart.xAxis
       .axisLabel('{{xlabel}}')

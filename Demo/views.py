@@ -67,14 +67,14 @@ def LR_3in(request):
             mean_line_cost = mean_line_data[:, 2]
 
             if form.cleaned_data['show_result'] == 'C':
-                scatter_data = [{"x": period, "y": cost, "shape": "square"},]
+                scatter_data = [{"x": period, "y": cost, "shape": "square", "size": 50},]
                 line_data = [{"x": period, "y": cost} for period, cost in zip(mean_line_period, mean_line_cost)]
                 xlabel = "진료 기간(일)"
                 ylabel = "비용(원)"
             else:
                 sorted_period = [x for (y, x) in sorted(zip(mean_line_cost, mean_line_period))]
                 sorted_cost = sorted(mean_line_cost)
-                scatter_data = [{"x": cost, "y": period, "shape": "square"},]
+                scatter_data = [{"x": cost, "y": period, "shape": "square", "size": 50},]
                 line_data = [{"x": cost, "y": period} for period, cost in zip(sorted_period, sorted_cost)]
                 xlabel = "비용(원)"
                 ylabel = "진료 기간(일)"
