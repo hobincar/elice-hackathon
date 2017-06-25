@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from .views import LR_3in, LR_4in
+from .views import LR_3in, LR_4in, test
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^LR_3in/', LR_3in, name='LR_3in'),
     url(r'^LR_4in/', LR_4in, name='LR_4in'),
+    url(r'^test/', test, name='test'),
     url(r'^$', LR_3in, name='LR_3in'),
 ]
