@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 import random
 from collections import Counter
-import math
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
